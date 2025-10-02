@@ -1,10 +1,13 @@
 import express from "express";  // if type is module in package.json
-import notesRoutes from "./routes/notesRoutes.js"
-import { connectDB } from "./config/db.js";
+// const express = require("express")  // if type is common js in package.json
 
 import dotenv from "dotenv"
 import rateLimiter from "./middleware/ratelimiter.js";
-// const express = require("express")  // if type is common js in package.json
+import cors from "cors";
+
+import notesRoutes from "./routes/notesRoutes.js"
+import { connectDB } from "./config/db.js";
+
 
 
 dotenv.config()
@@ -13,8 +16,12 @@ const PORT = process.env.PORT || 5001
 
 
 // Middleware
+app.use(cors({
+    origin: "http://localhost:5173"   // frontend url,
+}))
 app.use(express.json())   // this is to parse the incoming json data from the req body to use as {title, content} = req.body otherwise req.body will be undefined
 app.use(rateLimiter);  // to check the rate limit for each request
+
 
 // our simple custom middleware
 // app.use((req, res, next) => {

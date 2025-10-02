@@ -1,9 +1,9 @@
 import React from 'react'
 
-const NoteDetail = () => {
+const NoteDetailPage = () => {
   return (
-    <div>NoteDetail</div>
+    <div>NoteDetailPage</div>
   )
 }
 
-export default NoteDetail
+export default NoteDetailPage
