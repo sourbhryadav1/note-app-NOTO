@@ -26,7 +26,7 @@ A minimalist, responsive note-taking app built with MongoDB, Express, React (Vit
 ### 1) Clone and install
 ```bash
 git clone https://github.com/sourbhryadav1/note-app-NOTO.git
-cd "mern/note app"
+cd "note app"
 ```
 
 #### Backend
