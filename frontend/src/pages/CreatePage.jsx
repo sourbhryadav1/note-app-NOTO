@@ -4,9 +4,10 @@ import { Link, useNavigate} from 'react-router'
 import toast from 'react-hot-toast';
 import axios from 'axios';
 import api from '../lib/axios.js';   // import the axios instance
+import Navbar from "../components/Navbar.jsx";
 
 const CreatePage = () => {
-  const [title, serTitle] = useState("");
+  const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -40,8 +41,9 @@ const CreatePage = () => {
   };
   return (
     <div className='min-h-screen bg-base-200'>
-      <div className='container mx-auto px-4 py-8'>
-        <div className='mzx-w-2xl mx-auto'>
+      <Navbar />
+      <div className='container mx-auto px-4 py-4'>
+        <div className='max-w-2xl mx-auto'>
           <Link to={'/'} className="btn btn-ghost mb-6">
             <ArrowLeftIcon className='size-5' />
             Back to Notes
@@ -59,15 +61,15 @@ const CreatePage = () => {
                     placeholder='Note Title' 
                     className='input input-bordered' 
                     value={title} 
-                    onChange={(e) => serTitle(e.target.value)}/>
+                    onChange={(e) => setTitle(e.target.value)}/>
                 </div>
                 <div className='form-control mb-4'>
-                  <lable className="lable">
+                  <label className="label">
                     <span className="label-text">Content</span>
-                  </lable>
+                  </label>
                   <textarea 
                     placeholder='Write your note here...'
-                    className='textarea textarea-bordered h-32'
+                    className='textarea textarea-bordered min-h-40 md:min-h-56'
                     value={content}
                     onChange={(e) => setContent(e.target.value)}
                   ></textarea>
