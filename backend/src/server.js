@@ -7,6 +7,7 @@ import cors from "cors";
 import helmet from "helmet";
 
 import notesRoutes from "./routes/notesRoutes.js";
+import authRoutes from "./routes/authRoutes.js";
 import { connectDB } from "./config/db.js";
 
 dotenv.config();
@@ -21,7 +22,7 @@ app.use(helmet());
 
 // Normalize and allow-list CORS origins (remove trailing slashes to match browser Origin exactly)
 const rawCorsOrigins = process.env.CORS_ORIGIN;
-// use const rawCorsOrigins = http://localhost:5173; for local development
+// const rawCorsOrigins = "http://localhost:5173"; // use for local development
 const allowedOrigins = [
   "http://localhost:5173", // dev
   "https://note-app-noto.vercel.app", // main prod
@@ -43,6 +44,7 @@ app.use(express.json());
 app.use(rateLimiter);
 
 // API routes
+app.use("/api/auth", authRoutes);
 app.use("/api/notes", notesRoutes);
 
 // Serve frontend in production
