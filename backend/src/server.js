@@ -23,25 +23,22 @@ app.use(helmet());
 const rawCorsOrigins = process.env.CORS_ORIGIN;
 // use const rawCorsOrigins = http://localhost:5173; for local development
 const allowedOrigins = [
-  "http://localhost:5173",               // dev
-  "https://note-app-noto.vercel.app",   // prod
+  "http://localhost:5173", // dev
+  "https://note-app-noto.vercel.app", // main prod
+  "https://note-app-noto-15tr2neoc-sourbhryadav1s-projects.vercel.app", // preview
 ];
 
-app.use(
-  cors({
-    origin: (origin, callback) => {
-      // Allow same-origin requests (no Origin header) e.g., curl/health checks
-      if (!origin) return callback(null, true);
+app.use(cors({
+  origin: (origin, callback) => {
+    if (!origin || origin.endsWith(".vercel.app") || origin === "http://localhost:5173") {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  credentials: true,
+}));
 
-      const normalizedOrigin = origin.replace(/\/+$/g, "");
-      if (allowedOrigins.includes(normalizedOrigin)) {
-        return callback(null, true);
-      }
-      return callback(new Error("Not allowed by CORS"));
-    },
-    credentials: true,
-  })
-);
 app.use(express.json());
 app.use(rateLimiter);
 
