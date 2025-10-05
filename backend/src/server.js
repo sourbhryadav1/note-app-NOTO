@@ -20,7 +20,8 @@ const __dirname = path.dirname(__filename);
 app.use(helmet());
 
 // Normalize and allow-list CORS origins (remove trailing slashes to match browser Origin exactly)
-const rawCorsOrigins = process.env.CORS_ORIGIN || "http://localhost:5173";
+const rawCorsOrigins = process.env.CORS_ORIGIN;
+// use const rawCorsOrigins = http://localhost:5173; for local development
 const allowedOrigins = rawCorsOrigins
   .split(",")
   .map((o) => o.trim().replace(/\/+$/g, ""))
@@ -48,18 +49,16 @@ app.use(rateLimiter);
 app.use("/api/notes", notesRoutes);
 
 // Serve frontend in production
-if (process.env.NODE_ENV === "production") {
-  const frontendPath = path.join(__dirname, "../../frontend/dist");
+const frontendPath = path.join(__dirname, "../../frontend/dist");
   app.use(express.static(frontendPath));
 
   app.get("*", (req, res) => {
     res.sendFile(path.join(frontendPath, "index.html"));
   });
-} else {
-  app.get("/", (req, res) => {
-    res.send("API is running...");
-  });
-}
+
+  // use app.get("/", (req, res) => {
+  //   res.send("API is running...");
+  // }); for local development
 
 // Start server after DB connection
 connectDB().then(() => {
