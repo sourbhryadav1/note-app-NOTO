@@ -22,10 +22,10 @@ app.use(helmet());
 // Normalize and allow-list CORS origins (remove trailing slashes to match browser Origin exactly)
 const rawCorsOrigins = process.env.CORS_ORIGIN;
 // use const rawCorsOrigins = http://localhost:5173; for local development
-const allowedOrigins = rawCorsOrigins
-  .split(",")
-  .map((o) => o.trim().replace(/\/+$/g, ""))
-  .filter(Boolean);
+const allowedOrigins = [
+  "http://localhost:5173",               // dev
+  "https://note-app-noto.vercel.app",   // prod
+];
 
 app.use(
   cors({
