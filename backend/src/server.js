@@ -18,8 +18,29 @@ const __dirname = path.dirname(__filename);
 
 // Middleware
 app.use(helmet());
-const ALLOWED_ORIGIN = process.env.CORS_ORIGIN || "http://localhost:5173";
-app.use(cors({ origin: ALLOWED_ORIGIN }));
+
+// Normalize and allow-list CORS origins (remove trailing slashes to match browser Origin exactly)
+const rawCorsOrigins = process.env.CORS_ORIGIN || "http://localhost:5173";
+const allowedOrigins = rawCorsOrigins
+  .split(",")
+  .map((o) => o.trim().replace(/\/+$/g, ""))
+  .filter(Boolean);
+
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      // Allow same-origin requests (no Origin header) e.g., curl/health checks
+      if (!origin) return callback(null, true);
+
+      const normalizedOrigin = origin.replace(/\/+$/g, "");
+      if (allowedOrigins.includes(normalizedOrigin)) {
+        return callback(null, true);
+      }
+      return callback(new Error("Not allowed by CORS"));
+    },
+    credentials: true,
+  })
+);
 app.use(express.json());
 app.use(rateLimiter);
 
