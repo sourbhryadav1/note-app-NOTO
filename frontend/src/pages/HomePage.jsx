@@ -43,7 +43,7 @@ const HomePage = () => {
       {israteLimited && <RateLimitedUi />}
 
       <div className='max-w-7xl mx-auto p-4 mt-6'>
-        {loading && <div className='text-center text-primary py-10'>Loading Notes...</div>}
+        {loading && <div className='text-center text-primary py-10'>Starting Backend... "Please wait a moment!"</div>}
 
         {notes.length === 0 && !israteLimited && <NotesNotFound />} 
 
