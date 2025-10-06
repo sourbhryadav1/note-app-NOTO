@@ -2,8 +2,12 @@
 
 Minimalist, responsive note-taking app built with MongoDB, Express, React (Vite), and Node. Includes rate limiting, toast notifications, and a light/dark minimalist theme with a persistent toggle.
 
-## Live Demo
-- Frontend: [note-app-noto.vercel.app](https://note-app-noto.vercel.app/)
+## 🚀 Live Demo
+- **Frontend:** [note-app-noto.vercel.app](https://note-app-noto.vercel.app/)
+- **Backend (Render):** [note-app-NOTO-backend.onrender.com](https://note-app-NOTO-backend.onrender.com)
+
+> ⚠️ **Note:** The backend is hosted on Render’s free tier, which goes to sleep after inactivity.  
+> Please wait **20–30 seconds** for the backend to start when you first open the app and refresh it again.
 
 ## Features
 - CRUD notes (title, content)
@@ -17,6 +21,24 @@ Minimalist, responsive note-taking app built with MongoDB, Express, React (Vite)
 ## Tech Stack
 - Frontend: React 19, Vite, TailwindCSS, daisyUI, Axios, React Router
 - Backend: Node, Express, MongoDB (Mongoose), dotenv, cors, helmet
+
+---
+
+## 🖼️ Screenshots
+
+<p align="center">
+  <img src="./assets/login.png" width="180" alt="Login Page" />
+  <img src="./assets/signup.png" width="180" alt="Signup Page" />
+  <img src="./assets/home_light.png" width="180" alt="Home - Light Mode" />
+</p>
+
+<p align="center">
+  <img src="./assets/home_dark.png" width="180" alt="Home - Dark Mode" />
+  <img src="./assets/create_note.png" width="180" alt="Create Note" />
+  <img src="./assets/delete_note.png" width="180" alt="Delete Note" />
+</p>
+
+
 
 ---
 
