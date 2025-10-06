@@ -44,6 +44,10 @@ app.use(express.json());
 app.use(rateLimiter);
 
 // API routes
+app.get("/", (req, res) => {
+  res.send("🟢 Note App Backend is running!");
+});
+
 app.use("/api/auth", authRoutes);
 app.use("/api/notes", notesRoutes);
 
